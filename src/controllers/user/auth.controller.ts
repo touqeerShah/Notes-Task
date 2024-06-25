@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyJWTToken } from '../../services/auth.service';
+import { isSessionExist, verifyJWTToken } from '../../services/auth.service';
 import { IToken } from "../../interfaces/IToken"
 import {
     IReturnRegister,
@@ -13,7 +13,7 @@ import {
 export { clearExistingUserSessions } from "../../services/auth.service";
 
 import * as _ from "lodash";
-import jwt from 'jsonwebtoken';
+
 
 
 
@@ -24,12 +24,8 @@ export async function authAPIRequest(
     next: NextFunction
 ) {
     // console.log(req.body.loginUser._id)
-    const tokeUsername = req.body.loginUser.user.username;
-    const username = _.get(req.body, "username", "").toLowerCase();
+    const username = _.get(req.body, 'loginUser.user.username', '');
     const password = _.get(req.body, "password", "").toLowerCase();
-    const email = _.get(req.body, "email", "pending");
-    const firstName = _.get(req.body, "firstName", Date.now());
-    const lastName = _.get(req.body, "lastName", undefined);
 
     const functionName = _.get(req.body, "functionName", "");
 
@@ -37,18 +33,10 @@ export async function authAPIRequest(
         let response: Partial<IReturnRegister> = {};
         if (functionName)
             switch (functionName) {
-                case "regularRegister":
-                    response = await regularRegister({
-                        username,
-                        password,
-                        email,
-                        firstName,
-                        lastName,
-                    } as IUser & { password: string });
-                    break;
+
                 case "resetPassword":
                     response = await resetPassword({
-                        username: tokeUsername,
+                        username: username,
                         password,
                     } as IUser & { password: string });
                     break;
@@ -83,10 +71,29 @@ export async function logoutOldSession(req: Request, res: Response, next: NextFu
         if (err) {
             console.error(err);
             res.status(500).send({ message: "Session have some Issues please Try again" });
-        } 
+        }
     });
     next();
 }
+
+export async function register(req: Request, res: Response, next: NextFunction) {
+    console.log(">>>>> register <<<<")
+    const username = _.get(req.body, "username", "").toLowerCase();
+    const password = _.get(req.body, "password", "").toLowerCase();
+    const email = _.get(req.body, "email", "pending");
+    const firstName = _.get(req.body, "firstName", Date.now());
+    const lastName = _.get(req.body, "lastName", undefined);
+
+    const response = await regularRegister({
+        username,
+        password,
+        email,
+        firstName,
+        lastName,
+    } as IUser & { password: string });
+    res.send(response);
+}
+//use
 
 
 export async function getUserProfile(req: Request, res: Response, next: NextFunction) {
@@ -99,7 +106,13 @@ export async function getUserProfile(req: Request, res: Response, next: NextFunc
 
     }
     return res.status(200).send({
-        token: generateJWTToken(req.user),
+        token: `Bearer ` + generateJWTToken({
+            user: {
+                email: user.email,
+                username: user.username,
+                isActivated: user.isActivated
+            }, session: req.sessionID
+        }),
         verified: true,
         message: "successful login",
         session: req.sessionID,
@@ -132,9 +145,11 @@ export async function verifyToken(
     // console.log("req.sessionStore", req.sessionStore)
     if (verified.decoded && verified.decoded.session) {
         req.body.loginUser = verified.decoded;
+        const sessionId = req.body.loginUser.session
+        const isSessionActive = await isSessionExist( sessionId )
+        console.log(isSessionActive)
         req.user = req.body.loginUser.user;
-        console.log("req.body.loginUser", req.isAuthenticated());
-        if (!req.isAuthenticated()) {
+        if (!req.isAuthenticated() || !isSessionActive) {
             return res.status(400).send({
                 verified: true,
                 message: "Session Expired expired!",

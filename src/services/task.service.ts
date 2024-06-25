@@ -1,7 +1,6 @@
 import { taskModel } from "../models/";
 import * as _ from "lodash";
-import mongoose from "mongoose";
-
+import {convertToEndOfDay} from "../utils/date.conveter"
 import {
     IReturn,
     ITask,
@@ -60,6 +59,7 @@ export const updateTask = async ({
     createdBy,
 }: ITask): Promise<IReturn> => {
     try {
+        
         const task = await taskModel.findOne({ _id, createdBy });
 
         if (!task) {
@@ -70,9 +70,11 @@ export const updateTask = async ({
                 pageTotal: 0,
             };
         }
+      
+        
         const updatedTask = await taskModel.findByIdAndUpdate(
             _id,
-            { title, description, status, dueDate, createdBy },
+            { title, description, status, dueDate },
             { new: true }
         );
         if (!updatedTask) {
@@ -104,8 +106,9 @@ export const getTaskDetails = async ({
     createdBy,
 }: ITask): Promise<IReturn> => {
     try {
-        const task = await taskModel.findById(_id, createdBy);
-        if (!task) {
+        const task = await taskModel.find({_id:_id, createdBy});
+        console.log("task",task)
+        if (task.length==0) {
             return {
                 message: "Task not found",
                 error: true,
@@ -140,11 +143,11 @@ export const filterTask = async ({
         const limit = pageLimit || 10;
         const page = pageNo || 1;
         const query: any = {};
-
         if (status) query.status = status;
         if (startDate) query.createdAt = { $gte: new Date(startDate) };
-        if (endDate)
-            query.createdAt = { ...query.createdAt, $lte: new Date(endDate) };
+        if (endDate) {
+            query.createdAt = { ...query.createdAt, $lte: convertToEndOfDay(endDate)};
+        }
         if (createdBy) query.createdBy = createdBy;
         const tasks = await taskModel
             .find(query)
@@ -232,3 +235,35 @@ export const deleteTask = async ({
         };
     }
 };
+export const deleteAllTask = async ({
+    createdBy,
+}: IQuery): Promise<IReturn> => {
+    try {
+        const query: object = {  createdBy: createdBy };
+
+        let deleteResult: IDelete = await taskModel.deleteMany(query);
+
+        if (deleteResult.deletedCount > 0) {
+            return {
+                results: undefined,
+                message: "Success",
+                error: false,
+                deleteResult: deleteResult,
+            };
+        } else
+            return {
+                results: undefined,
+                message: "User not found",
+                error: true,
+                deleteResult: deleteResult,
+            };
+    } catch (error: any) {
+        return {
+            results: undefined,
+            message: error,
+            error: true,
+        };
+    }
+};
+
+

@@ -1,7 +1,9 @@
 import { IUser, IReturn, IDelete } from "../interfaces/IUser";
 import User from "../models/user/user.model";
-
-
+import { deleteAllTask } from "./task.service"
+import {
+    IQuery,
+} from "../interfaces/ITask";
 
 export const statusChange = async ({
     username,
@@ -40,7 +42,7 @@ export const getUserDetails = async ({
 }: IUser): Promise<IReturn> => {
     try {
         const query: object = { username: username }
-        const projection = { username:1,isActivated:1,email: 1, firstName: 1, lastName: 1, _id: 0 };
+        const projection = { username: 1, isActivated: 1, email: 1, firstName: 1, lastName: 1, _id: 0 };
 
         let user = await User.findOne(
             query,
@@ -53,6 +55,7 @@ export const getUserDetails = async ({
                 users: undefined
             }
         } else {
+            await deleteAllTask({ createdBy: username } as IQuery)
             return {
                 message: "success",
                 error: false,
@@ -116,7 +119,7 @@ export const updateUserDetails = async ({
             {
                 $set: {
                     email,
-                    firstName, 
+                    firstName,
                     lastName,
 
                 }

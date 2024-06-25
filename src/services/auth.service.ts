@@ -47,12 +47,21 @@ export const regularRegister = async ({
             lastName
         });
         //register the user
+
         let registeredUser = await User.register(newUser, password);
         if (registeredUser) {
+
             return {
                 message: "User registered",
                 error: false,
-                user: registeredUser,
+                user: {
+                    "email": registeredUser.email,
+                    "username": registeredUser.username,
+                    "firstName": registeredUser.firstName,
+                    "lastName": registeredUser.lastName,
+                    "isActivated": registeredUser.isActivated,
+                    "_id": registeredUser._id
+                } as IUser,
             };
         } else {
             return {
@@ -70,9 +79,11 @@ export const regularRegister = async ({
     }
 };
 
-export const generateJWTToken = (user: any) => {
-  
-    let token = jwt.sign(user, jwtSecret, { expiresIn: "30m" });
+export const generateJWTToken = (payload: any) => {
+
+
+
+    let token = jwt.sign(payload, jwtSecret, { expiresIn: '30m' });
     return token;
 };
 
@@ -224,11 +235,11 @@ export const verifyJWTToken = (token: string) => {
 };
 
 
-export async function  clearExistingUserSessions  (userId: any)  {
+export async function clearExistingUserSessions(userId: any) {
     try {
         const sessions = await Session.find(); // fetch all sessions
 
-        const promises = sessions.map((sessionDocument:any) => {
+        const promises = sessions.map((sessionDocument: any) => {
             const session = sessionDocument.toObject() as ISessions;
 
             // console.log("= > ", session.session);
@@ -255,3 +266,19 @@ export async function  clearExistingUserSessions  (userId: any)  {
 };
 
 
+
+export async function isSessionExist( sessionId: any): Promise<boolean> {
+    try {
+        console.log("sessionId",sessionId)
+        const sessionDocument = await Session.findById(sessionId);
+
+        if (!sessionDocument) {
+            // Session does not exist
+            return false;
+        }
+        return true;
+    }
+    catch (error) {
+        return false;
+    }
+}

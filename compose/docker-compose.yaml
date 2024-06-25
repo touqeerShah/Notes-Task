@@ -1,12 +1,12 @@
 version: "3.5"
 services:
-  mongodb:
+  task-mongodb:
     # build: ./mongodb
     image: mongo:latest
-    container_name: -mongo
+    container_name: task-mongo
     command: mongod --auth
     ports:
-      - 27017:27017
+      - 47017:27017
     environment:
       MONGO_INITDB_ROOT_PASSWORD: cGFzc3dvcmQxMjM=
       MONGO_INITDB_ROOT_USERNAME: user1

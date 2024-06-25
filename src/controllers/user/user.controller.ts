@@ -12,7 +12,6 @@ export async function userAPIRequest(
     res: Response,
     next: NextFunction
 ) {
-    // console.log(req.body.loginUser._id)
     const username = req.body.loginUser.user.username;
     const email = _.get(req.body, "email", "pending");
     const firstName = _.get(req.body, "firstName", Date.now());

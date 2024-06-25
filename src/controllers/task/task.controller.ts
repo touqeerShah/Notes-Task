@@ -38,7 +38,6 @@ export async function taskAPIRequest(
     const pageLimit = _.get(req.body, "pageLimit", 20);
 
     const functionName = _.get(req.body, "functionName", "");
-
     try {
         let response: Partial<IReturn> = {};
         if (functionName)
@@ -52,13 +51,14 @@ export async function taskAPIRequest(
                         createdBy,
                     } as ITask);
                     break;
-                case "createBookmark":
+                case "updateTask":
                     response = await updateTask({
                         _id,
                         title,
                         description,
                         status,
                         dueDate,
+                        createdBy
                     } as ITask);
                     break;
 
@@ -68,7 +68,7 @@ export async function taskAPIRequest(
                         createdBy,
                     } as ITask);
                     break;
-                case "getBookmarkDetails":
+                case "filterTask":
                     response = await filterTask({
                         pageNo,
                         pageLimit,

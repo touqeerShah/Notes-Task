@@ -18,7 +18,8 @@ import cors from 'cors';
 
 const log = appConfig.log();
 
-const dns= "mongodb://" + dbConfig.mongoUser + ":" + dbConfig.mongoPassword + "@" + dbConfig.mongoAddress + ":" + dbConfig.mongoPort + "/" + dbConfig.mongoDatabase;
+const dns = "mongodb://" + dbConfig.mongoUser + ":" + dbConfig.mongoPassword + "@" + dbConfig.mongoAddress + ":" + dbConfig.mongoPort + "/" + dbConfig.mongoDatabase;
+
 
 
 export function initPassportAndSessions(app: express.Application) {
@@ -35,8 +36,6 @@ export function initPassportAndSessions(app: express.Application) {
     app.use(cookieParser());
     app.use(cors());
 
-    console.log("path.join(__dirname, 'profile-avatar')", path.join(process.cwd(), "src", 'profile-avatar'))
-    app.use('/profile-avatar', express.static(path.join(process.cwd(), "src", 'profile-avatar')));
 
 
     const env = app.get('env');
@@ -57,7 +56,7 @@ export function initPassportAndSessions(app: express.Application) {
                 },
                 resave: false,
                 saveUninitialized: false,
-                store: MongoStore.create({ mongoUrl:  dns }),
+                store: MongoStore.create({ mongoUrl: dns }),
             })
         );
 

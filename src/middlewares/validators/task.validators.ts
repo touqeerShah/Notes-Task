@@ -3,10 +3,8 @@ import { check, validationResult } from 'express-validator';
 // Validation for creating a task
 export const createTaskValidation = [
     check('title', 'Title is required').not().isEmpty().isLength({ min: 3 }).withMessage('Title must be at least 3 characters long'),
-    check('status', 'Status must be one of "pending", "in-progress", or "completed"').optional().isIn(['pending', 'in-progress', 'completed']),
     check('dueDate', 'Due date must be a valid date').optional().isISO8601(),
     check("functionName", "functionName is required").not().isEmpty().withMessage("functionName is invalid"),
-
 ];
 
 // Validation for updating a task

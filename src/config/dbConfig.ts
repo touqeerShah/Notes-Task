@@ -18,14 +18,14 @@ const configurations: { [key: string]: IDBConfig } = {
         mongoUser: process.env.DEV_MONGO_USER,
         mongoPassword: process.env.DEV_MONGO_PASS,
         mongoAddress: process.env.DEV_MONGO_ADDRESS,
-        mongoDatabase: process.env.DEV_MONGO_PORT,
+        mongoDatabase: process.env.DEV_MONGO_DATABASE,
         mongoPort: Number(process.env.DEV_MONGO_PORT)
     },
     production: {
         mongoUser: process.env.PROD_MONGO_USER,
         mongoPassword: process.env.PROD_MONGO_PASS,
         mongoAddress: process.env.PROD_MONGO_ADDRESS,
-        mongoDatabase: process.env.PROD_MONGO_PORT,
+        mongoDatabase: process.env.PROD_MONGO_DATABASE,
         mongoPort: Number(process.env.PROD_MONGO_PORT)
 
     },

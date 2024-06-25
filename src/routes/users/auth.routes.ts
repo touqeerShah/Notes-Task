@@ -12,6 +12,7 @@ import {
     getUserProfile,
     verifyToken,
     clearExistingUserSessions,
+    register
 } from "../../controllers/user/auth.controller";
 
 import {
@@ -41,15 +42,20 @@ router.post(
     authAPIRequest
 );
 
+router.post(
+    "/regularRegister",
+    registrationValidation,
+    handleValidationErrors,
+    register
+);
+
 router.post("/login", loginValidation, logoutOldSession, function (req: Request, res: Response, next: NextFunction) {
     passport.authenticate('local', function (err: any, user: any, info: any) {
         if (err) {
-            console.log("err", err);
 
             return next(err);
         }
         if (!user) {
-            console.log("user", user);
 
             return res.send({ message: "Invalid User Or Password", error: true });
         }
@@ -58,7 +64,6 @@ router.post("/login", loginValidation, logoutOldSession, function (req: Request,
 
         // Clear any existing sessions for the user
         clearExistingUserSessions(user.id).then(() => {
-            console.log("user.id", user.id)
             // Establish a new session for the current login
             req.logIn(user, function (err: any) {
                 if (err) { return next(err); }

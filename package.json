@@ -5,8 +5,8 @@
   "scripts": {
     "tsc": "tsc",
     "watch-tsc": "tsc -w",
-    "deploy": "npx tsc && node ./dist/server.js",
-    "watch-deploy": "npx tsc  && nodemon ./dist/server.js",
+    "deploy": "npx tsc && node ./dist/src/index.js",
+    "watch-deploy": "npx tsc  && nodemon ./dist/src/index.js",
     "server": "concurrently \"npm run watch-tsc\" \"npm run watch-deploy\"",
     "start": "npm run deploy",
     "rimraf": "./node_modules/rimraf/bin.js",
