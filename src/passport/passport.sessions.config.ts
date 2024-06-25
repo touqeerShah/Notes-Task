@@ -1,10 +1,13 @@
 import passport from 'passport';
 import express from 'express';
 import { Strategy as LocalStrategy } from 'passport-local';
-import User from "../models/user/userModel";
+import User from "../models/user/user.model";
 import compression from 'compression';
 import * as bodyParser from 'body-parser';
 import { appConfig } from '../config/appConfig';
+import { dbConfig } from '../config/dbConfig';
+
+
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
@@ -15,6 +18,7 @@ import cors from 'cors';
 
 const log = appConfig.log();
 
+const dns= "mongodb://" + dbConfig.mongoUser + ":" + dbConfig.mongoPassword + "@" + dbConfig.mongoAddress + ":" + dbConfig.mongoPort + "/" + dbConfig.mongoDatabase;
 
 
 export function initPassportAndSessions(app: express.Application) {
@@ -53,7 +57,7 @@ export function initPassportAndSessions(app: express.Application) {
                 },
                 resave: false,
                 saveUninitialized: false,
-                store: MongoStore.create({ mongoUrl: appConfig.mongoDB.dsn }),
+                store: MongoStore.create({ mongoUrl:  dns }),
             })
         );
 
@@ -70,7 +74,7 @@ export function initPassportAndSessions(app: express.Application) {
                 },
                 name: appConfig.name,
                 saveUninitialized: false,
-                store: MongoStore.create({ mongoUrl: "appConfig.mongoDB.dsn" }), // need tp add proper url access
+                store: MongoStore.create({ mongoUrl: dns }), // need tp add proper url access
             })
         );
         // console.log("new Date(Date.now() + 60 * 60 * 2 * 1000 + toMilliseconds(1, 0, 0))", new Date(Date.now() + 60 * 60 * 2 * 1000 + toMilliseconds(1, 0, 0)));

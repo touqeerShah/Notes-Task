@@ -13,15 +13,11 @@ export interface IResetToken extends Document {
 export interface IUser extends PassportLocalDocument {
     userAccess: IUserType["_id"];
     _id:string
-    id: number;
     email: string;
     firstName: string;
     lastName: string;
     username: string;
-    avatar: string;
     isActivated: boolean
-
-
 }
 
 

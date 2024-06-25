@@ -1,6 +1,2 @@
-import taskModel from "./task/taskModel";
-
-
-
-
+import taskModel from "./task/task.model";
 export { taskModel };

@@ -1,5 +1,5 @@
 import { Document, model, Schema } from 'mongoose';
-import { ISessions } from "./../../interfaces/ISessions"
+import { ISessions } from "../../interfaces/ISessions"
 
 // Assuming you've already established your mongoose connection elsewhere
 // const mongoDB = 'your_mongodb_uri';

@@ -1,28 +1,40 @@
-import express from "express";
-import { getAllUserList, uploadAvatar, statusChange, deleteUserRecord, updatedUserDetails } from "./../../controllers/user/userController"
-import {
-    verifyToken
-} from "../../controllers/user/authController";
+import express, { Request, Response, NextFunction } from "express";
+import { validationResult } from 'express-validator';
+const { oneOf, check } = require("express-validator");
 
 import {
-    getAllUserValidation,
-    uploadAvatarValidation,
+    verifyToken
+} from "../../controllers/user/auth.controller";
+import {
+    userAPIRequest
+} from "../../controllers/user/user.controller";
+
+import {
     statusChangeValidation,
-    deleteUserRecordValidation, SUDOOptionalUserAccessLevel, updateUserValidation
+    deleteUserRecordValidation,
+    getDetailValidation,
+    updateUserValidation
 } from "../../middlewares/validators/user.validators";
 
 
 const router = express.Router();
-// router.post("/getAllUserList", verifyToken, getAllUserValidation, getAllUserList);
-// router.post("/uploadProfileAvatar", verifyToken, uploadAvatarValidation, uploadAvatar);
-// router.post("/statusChange", verifyToken, statusChangeValidation, statusChange);
-// router.post("/deleteUserRecord", verifyToken, deleteUserRecordValidation, deleteUserRecord);
-// router.post("/updatedUserDetails", verifyToken, updateUserValidation, SUDOOptionalUserAccessLevel, updatedUserDetails);
-
-// // @route   GET /profile
-// @desc    Get user profile
-// @access  Private
-//middleware handles validating the user exists and is logged in
-// router.get('/profile', connectEnsureLogin.ensureLoggedIn("loginerror"), userProfile);
-
+const handleValidationErrors = (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+};
+router.post(
+    "/userAPIRequest",
+    verifyToken,
+    oneOf([
+        [check("functionName").equals("statusChange"), ...statusChangeValidation],
+        [check("functionName").equals("deleteMyAccount"), ...deleteUserRecordValidation],
+        [check("functionName").equals("getUserDetails"), ...getDetailValidation],
+        [check("functionName").equals("updateUserDetails"), ...updateUserValidation],
+    ]),
+    handleValidationErrors,
+    userAPIRequest
+);
 export default router;

@@ -37,5 +37,5 @@ export interface IReturn {
 export interface IQuery  {
     _id:string;
     createdBy: string;
-    status: 'pending' | 'in-progress' | 'completed';;
+    status: 'pending' | 'in-progress' | 'completed';
   }

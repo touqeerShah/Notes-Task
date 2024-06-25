@@ -4,10 +4,10 @@
 
 export interface IDBConfig {
     // Define your configuration properties here
-    mongoUser: string,
-    mongoPassword: string,
+    mongoUser?: string,
+    mongoPassword?: string,
     mongoAddress?: string,
-    mongoDB: string,
+    mongoDatabase?: string,
     mongoPort: number,
 
 }

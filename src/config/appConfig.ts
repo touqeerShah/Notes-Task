@@ -15,7 +15,7 @@ const loggers = {
 // Define configurations for different environments
 const configurations: { [key: string]: IAppConfig } = {
     development: {
-        siteName: process.env.DEV_APP_NAME,
+        siteName: process.env.DEV_APP_NAME || "Notes APP",
         log: loggers.development,
         secret: process.env.DEV_SECRET || "another very secret 12345",
         jwtSecret: process.env.DEV_JWT_SECRET || "another very secret 12345",
@@ -23,16 +23,16 @@ const configurations: { [key: string]: IAppConfig } = {
         name: process.env.DEV_SESSIONID || "sessionId",
     },
     production: {
-        siteName: process.env.PROD_APP_NAME,
+        siteName: process.env.PROD_APP_NAME || "Notes APP",
         log: loggers.development,
         secret: process.env.PROD_SECRET || "another very secret 12345",
         jwtSecret: process.env.PROD_JWT_SECRET || "another very secret 12345",
-        port: Number(process.env.PROD_PORT )|| 3000,
+        port: Number(process.env.PROD_PORT) || 3000,
         name: process.env.PROD_SESSIONID || "sessionId",
 
     },
     test: {
-        siteName: process.env.TEST_APP_NAME,
+        siteName: process.env.TEST_APP_NAME || "Notes APP",
         log: loggers.development,
         secret: process.env.TEST_SECRET || "another very secret 12345",
         jwtSecret: process.env.TEST_JWT_SECRET || "another very secret 12345",

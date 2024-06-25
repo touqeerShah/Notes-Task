@@ -8,7 +8,7 @@ import cluster from 'cluster'
 import { cpus } from 'os'
 import { appConfig } from './config/appConfig';
 import App from './app';
-import { connectMongoDB } from './services/dbService';
+import { connectMongoDB } from './services/db.service';
 
 const log = appConfig.log();
 const numCPUs = cpus().length;
@@ -55,7 +55,7 @@ if (cluster.isPrimary) {
     const port = normalizePort(process.env.PORT || '3000');
     app?.set('port', port);
     if ("config.mongoDB.dsn") // make connection enabel
-        connectMongoDB("config.mongoDB.dsn")
+        connectMongoDB()
             .then(() => {
 
                 log.info('Connected to MongoDB');

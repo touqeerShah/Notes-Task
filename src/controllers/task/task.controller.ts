@@ -83,13 +83,13 @@ export async function taskAPIRequest(
                         _id,
                         createdBy,
                         status,
-                    } as ITask);
+                    } as IQuery);
                     break;
                 case "deleteTask":
                     response = await deleteTask({
                         _id,
                         createdBy,
-                    } as ITask);
+                    } as IQuery);
                     break;
                 default:
                     res
