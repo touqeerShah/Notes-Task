@@ -1,0 +1,800 @@
+{
+	"info": {
+		"_postman_id": "672960b3-ea9b-4d41-864f-e86709afb85e",
+		"name": "To-Do-Task",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" width=\"2162\" height=\"1530\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11496047"
+	},
+	"item": [
+		{
+			"name": "regularRegister",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "test5",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "test5@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "text"
+						},
+						{
+							"key": "firstName",
+							"value": "test5",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "test5",
+							"type": "text"
+						},
+						{
+							"key": "functionName",
+							"value": "regularRegister",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/regularRegister",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"regularRegister"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "createTask",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2N2IzOWI5ZmNkMDgzNDU5YjU4NjYxMiIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0MSIsImlzQWN0aXZhdGVkIjp0cnVlfSwic2Vzc2lvbiI6ImpfRXpwMTEyZkhsWl92dWttTl85cTB0c2VUQ29pcnh6IiwiaWF0IjoxNzE5Mzg5MDU3LCJleHAiOjE3MTkzOTA4NTd9.9u2Bamx0jfLoW9A0gOJGCIpAXx5AOhWb0CTdgT3t3Xo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Job Task",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Work on Task",
+							"type": "text"
+						},
+						{
+							"key": "dueDate",
+							"value": "2024-07-24",
+							"type": "text"
+						},
+						{
+							"key": "functionName",
+							"value": "createTask",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/task/taskAPIRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"task",
+						"taskAPIRequest"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "updateTask",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2N2IzOWI5ZmNkMDgzNDU5YjU4NjYxMiIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0MSIsImlzQWN0aXZhdGVkIjp0cnVlfSwic2Vzc2lvbiI6ImpfRXpwMTEyZkhsWl92dWttTl85cTB0c2VUQ29pcnh6IiwiaWF0IjoxNzE5Mzg5MDU3LCJleHAiOjE3MTkzOTA4NTd9.9u2Bamx0jfLoW9A0gOJGCIpAXx5AOhWb0CTdgT3t3Xo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Job Task",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Work on Task",
+							"type": "text"
+						},
+						{
+							"key": "dueDate",
+							"value": "2024-07-29",
+							"type": "text"
+						},
+						{
+							"key": "functionName",
+							"value": "updateTask",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "in-progress",
+							"type": "text"
+						},
+						{
+							"key": "_id",
+							"value": "667b3a1ab2d2b50f8e9d3eba",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/task/taskAPIRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"task",
+						"taskAPIRequest"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "filterTask",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2N2IzOWI5ZmNkMDgzNDU5YjU4NjYxMiIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0MSIsImlzQWN0aXZhdGVkIjp0cnVlfSwic2Vzc2lvbiI6ImpfRXpwMTEyZkhsWl92dWttTl85cTB0c2VUQ29pcnh6IiwiaWF0IjoxNzE5Mzg5MDU3LCJleHAiOjE3MTkzOTA4NTd9.9u2Bamx0jfLoW9A0gOJGCIpAXx5AOhWb0CTdgT3t3Xo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "pageNo",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "pageLimit",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "pending",
+							"type": "text"
+						},
+						{
+							"key": "functionName",
+							"value": "filterTask",
+							"type": "text"
+						},
+						{
+							"key": "startDate",
+							"value": "2024-06-21",
+							"type": "text"
+						},
+						{
+							"key": "endDate",
+							"value": "2024-06-26",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/task/taskAPIRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"task",
+						"taskAPIRequest"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "getTaskDetails",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2N2IzOWI5ZmNkMDgzNDU5YjU4NjYxMiIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0MSIsImlzQWN0aXZhdGVkIjp0cnVlfSwic2Vzc2lvbiI6ImpfRXpwMTEyZkhsWl92dWttTl85cTB0c2VUQ29pcnh6IiwiaWF0IjoxNzE5Mzg5MDU3LCJleHAiOjE3MTkzOTA4NTd9.9u2Bamx0jfLoW9A0gOJGCIpAXx5AOhWb0CTdgT3t3Xo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "_id",
+							"value": "667b3a1ab2d2b50f8e9d3eba",
+							"type": "text"
+						},
+						{
+							"key": "functionName",
+							"value": "getTaskDetails",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/task/taskAPIRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"task",
+						"taskAPIRequest"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "changeStatus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2N2IzOWI5ZmNkMDgzNDU5YjU4NjYxMiIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0MSIsImlzQWN0aXZhdGVkIjp0cnVlfSwic2Vzc2lvbiI6ImpfRXpwMTEyZkhsWl92dWttTl85cTB0c2VUQ29pcnh6IiwiaWF0IjoxNzE5Mzg5MDU3LCJleHAiOjE3MTkzOTA4NTd9.9u2Bamx0jfLoW9A0gOJGCIpAXx5AOhWb0CTdgT3t3Xo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "_id",
+							"value": "667b3a1ab2d2b50f8e9d3eba",
+							"type": "text"
+						},
+						{
+							"key": "functionName",
+							"value": "changeStatus",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "complete",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/task/taskAPIRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"task",
+						"taskAPIRequest"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "deleteTask",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2N2IzOWI5ZmNkMDgzNDU5YjU4NjYxMiIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0MSIsImlzQWN0aXZhdGVkIjp0cnVlfSwic2Vzc2lvbiI6ImpfRXpwMTEyZkhsWl92dWttTl85cTB0c2VUQ29pcnh6IiwiaWF0IjoxNzE5Mzg5MDU3LCJleHAiOjE3MTkzOTA4NTd9.9u2Bamx0jfLoW9A0gOJGCIpAXx5AOhWb0CTdgT3t3Xo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "_id",
+							"value": "667b3a1ab2d2b50f8e9d3eba",
+							"type": "text"
+						},
+						{
+							"key": "functionName",
+							"value": "deleteTask",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/task/taskAPIRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"task",
+						"taskAPIRequest"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "updateUserDetails",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2N2IyYWE4OWVlNGE5YjA0MWE5MDk4ZiIsImlkIjowLCJlbWFpbCI6InRlc3QxQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoidGVzdDEiLCJmaXJzdE5hbWUiOiJ0IiwibGFzdE5hbWUiOiJrIiwiaXNBY3RpdmF0ZWQiOnRydWUsInNhbHQiOiJmMmIwZjZjYmVhNGMyMjRkMmFhMzI0Y2M5NmNjNjQ5YjhiZTI3OGNkMWVhMzhhY2JhNzhiMmYzZmU4ZTNlNTA5IiwiaGFzaCI6IjE4ZmEwNGVmMzc5ZmIzMDhiYTM3Mjk3MGFmNTBlMWMxNzliMmUzNjZiM2FmOTc3ZTY3NGU3N2M3NWZjMDM2OThkZWRkYWExNmUxMDMxMWE0NTQyZWNkYjVlZjJhYmViODdmNGMxOGZhNDkwNDNiOTliODQxZjFkNTU5YTRlZThiZTdlNzI3YzBlYzhmYjIwNmM1OGZhY2E2YzgxY2IyZjU2YWI5N2YwZjkzMzI3OWY5ZjFkODYwNDUzNTIyZTBmNzhlMmQ1N2U0YTY2NTkxNzg2YWJjOGM2OTM3Yzg3YjM4N2ZjNzc3YWY4ZGMzYmY1Mjc0ZDBjZGJmY2Q4NmQ4MTJlYzRlOTI3MDJmMjNjMTg0NDRiNzFkNTFmODEwMzExN2YzNDE4ZTUyMWMwNTFhMmJlYjBlNTBmOTFjMzA2MjhlMzkxOGU5ZTQ2ODAxNmQwMzlmNDE5Mjk5ZDhjMDA5MWQ4NjMzZTVmOTc0ZTFlZTNkZjcxODk0MjU4NTQxNTQxNTA0MTAzODVlZTk2NWQ0ZmE3ZWMxZDk2NDFmYjFiNDYzMmU2MjAyM2FkM2FjMjM1ZTQ1YmQzNTQ2NTIyZTIyZmMzZGYyYzc1Nzc2MTBiN2NlZjcwNTA4YmRmMzAyMzc4OGQ1ZGY3MmI3OWIwMmM3ZmM0MDllMDNhOWEwODRhM2M5ZGI5M2Q5Mjc1MzI4YTc3YTU0MTBhYzdkMDY5NjlmNjFmNThmNzkyY2IwNWMxMDg3ZGE4NTEyNzRhNzI0MDg3OGNmNDM0MjI0MmU1OWZjNjFlOTdlZWY2NjFmODZhMDA0NWFjN2E5MDgzMmRlZDUxM2JmOTRkMmRjOGIzNTdmYWQyNTNmMGJkNDg3MGRiNzU4OTMwOGY5MWUwYWEzMjZlYjI4YzU3ZmRlNjhlNTY3Mjg2ZTM0YmI5ODk5ZGRiMTYyMTBlNGI1OWRiN2U5MDZjZGMxZDQ1MWQzMmJlZjFjMGQwMDI5YjFjODJlNGNmMjc1Mjk4M2E0MDM4YzAyNDI1YmE1Yjc5YmZlNjQ5ZjE4NDgzM2NmZmIzYjJhZGVhOWQzMDVjMTc0MjczMmFhM2Y2MjU4MjhhYmExM2I1ZTc1ZGFmZTE5Y2JmYmRmYzg2MjhlYTNkMDNjYjE5MWE5M2JkODg3MGI0NjBkYjVjMjczYzAzNzYxMjQxZGRkNTM1OTE3MmY5YzFlZjMyMmNkODU3OWUxMTVlMWE1Nzc2NjQxMjlkNDRhMDRmZTE1MTRiODRjODYzZDE5ZmY2MmE3ZDMzOTg1NTUwZjlmZDE1ZDRjNTg0MTNlMTNkZWUxMmYwMmIxY2VmODRmMjIyOWM4NDdhODEzZmVjMzA1OWMxOTYzYWMiLCJjcmVhdGVkQXQiOiIyMDI0LTA2LTI1VDIwOjM4OjAwLjE2NVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTA2LTI1VDIwOjM4OjAwLjE2NVoiLCJfX3YiOjB9LCJzZXNzaW9uIjoiYjRZN2hWMjFLWXVRa0pXUTdKU183bk5uNmVlZlVjWmsiLCJpYXQiOjE3MTkzNDg0MzcsImV4cCI6MTcxOTM1MDIzN30.FAGeeJPIU9HPVOj5MgDh7w93_FNopZO80qfW1CgvXaI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "firstName",
+							"value": "test1",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "user1",
+							"type": "text"
+						},
+						{
+							"key": "functionName",
+							"value": "updateUserDetails",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "test1@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/user/userAPIRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"userAPIRequest"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "getUserDetails",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2N2IyYWE4OWVlNGE5YjA0MWE5MDk4ZiIsImlkIjowLCJlbWFpbCI6InRlc3QxQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoidGVzdDEiLCJmaXJzdE5hbWUiOiJ0IiwibGFzdE5hbWUiOiJrIiwiaXNBY3RpdmF0ZWQiOnRydWUsInNhbHQiOiJmMmIwZjZjYmVhNGMyMjRkMmFhMzI0Y2M5NmNjNjQ5YjhiZTI3OGNkMWVhMzhhY2JhNzhiMmYzZmU4ZTNlNTA5IiwiaGFzaCI6IjE4ZmEwNGVmMzc5ZmIzMDhiYTM3Mjk3MGFmNTBlMWMxNzliMmUzNjZiM2FmOTc3ZTY3NGU3N2M3NWZjMDM2OThkZWRkYWExNmUxMDMxMWE0NTQyZWNkYjVlZjJhYmViODdmNGMxOGZhNDkwNDNiOTliODQxZjFkNTU5YTRlZThiZTdlNzI3YzBlYzhmYjIwNmM1OGZhY2E2YzgxY2IyZjU2YWI5N2YwZjkzMzI3OWY5ZjFkODYwNDUzNTIyZTBmNzhlMmQ1N2U0YTY2NTkxNzg2YWJjOGM2OTM3Yzg3YjM4N2ZjNzc3YWY4ZGMzYmY1Mjc0ZDBjZGJmY2Q4NmQ4MTJlYzRlOTI3MDJmMjNjMTg0NDRiNzFkNTFmODEwMzExN2YzNDE4ZTUyMWMwNTFhMmJlYjBlNTBmOTFjMzA2MjhlMzkxOGU5ZTQ2ODAxNmQwMzlmNDE5Mjk5ZDhjMDA5MWQ4NjMzZTVmOTc0ZTFlZTNkZjcxODk0MjU4NTQxNTQxNTA0MTAzODVlZTk2NWQ0ZmE3ZWMxZDk2NDFmYjFiNDYzMmU2MjAyM2FkM2FjMjM1ZTQ1YmQzNTQ2NTIyZTIyZmMzZGYyYzc1Nzc2MTBiN2NlZjcwNTA4YmRmMzAyMzc4OGQ1ZGY3MmI3OWIwMmM3ZmM0MDllMDNhOWEwODRhM2M5ZGI5M2Q5Mjc1MzI4YTc3YTU0MTBhYzdkMDY5NjlmNjFmNThmNzkyY2IwNWMxMDg3ZGE4NTEyNzRhNzI0MDg3OGNmNDM0MjI0MmU1OWZjNjFlOTdlZWY2NjFmODZhMDA0NWFjN2E5MDgzMmRlZDUxM2JmOTRkMmRjOGIzNTdmYWQyNTNmMGJkNDg3MGRiNzU4OTMwOGY5MWUwYWEzMjZlYjI4YzU3ZmRlNjhlNTY3Mjg2ZTM0YmI5ODk5ZGRiMTYyMTBlNGI1OWRiN2U5MDZjZGMxZDQ1MWQzMmJlZjFjMGQwMDI5YjFjODJlNGNmMjc1Mjk4M2E0MDM4YzAyNDI1YmE1Yjc5YmZlNjQ5ZjE4NDgzM2NmZmIzYjJhZGVhOWQzMDVjMTc0MjczMmFhM2Y2MjU4MjhhYmExM2I1ZTc1ZGFmZTE5Y2JmYmRmYzg2MjhlYTNkMDNjYjE5MWE5M2JkODg3MGI0NjBkYjVjMjczYzAzNzYxMjQxZGRkNTM1OTE3MmY5YzFlZjMyMmNkODU3OWUxMTVlMWE1Nzc2NjQxMjlkNDRhMDRmZTE1MTRiODRjODYzZDE5ZmY2MmE3ZDMzOTg1NTUwZjlmZDE1ZDRjNTg0MTNlMTNkZWUxMmYwMmIxY2VmODRmMjIyOWM4NDdhODEzZmVjMzA1OWMxOTYzYWMiLCJjcmVhdGVkQXQiOiIyMDI0LTA2LTI1VDIwOjM4OjAwLjE2NVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTA2LTI1VDIwOjM4OjAwLjE2NVoiLCJfX3YiOjB9LCJzZXNzaW9uIjoiYjRZN2hWMjFLWXVRa0pXUTdKU183bk5uNmVlZlVjWmsiLCJpYXQiOjE3MTkzNDg0MzcsImV4cCI6MTcxOTM1MDIzN30.FAGeeJPIU9HPVOj5MgDh7w93_FNopZO80qfW1CgvXaI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "functionName",
+							"value": "getUserDetails",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/user/userAPIRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"userAPIRequest"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "statusChange",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoidGVzdDRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0NCIsImlzQWN0aXZhdGVkIjp0cnVlfSwic2Vzc2lvbiI6Ii02OFpndjAxZ21IX1pVWEdmaXY5X2p0TFljUnBsUVdSIiwiaWF0IjoxNzE5Mzg4MjMxLCJleHAiOjE3MTkzOTAwMzF9.-hqYhpX3OGPLRdXSVL-8oYzYH7_i3wqvep03hPlTZL4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "functionName",
+							"value": "statusChange",
+							"type": "text"
+						},
+						{
+							"key": "isActivated",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/user/userAPIRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"userAPIRequest"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMyAccount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoidGVzdDVAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0NSIsImlzQWN0aXZhdGVkIjp0cnVlfSwic2Vzc2lvbiI6IndweS1WODdBSjRKMWd6VGZiUWFvU1hvYUQtT2NQZmN5IiwiaWF0IjoxNzE5Mzg4NTAxLCJleHAiOjE3MTkzOTAzMDF9.ux2Ae7322zMyS_0PD1HUsst9Q1BqlQHng3p_P7FUknc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "functionName",
+							"value": "deleteMyAccount",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/user/userAPIRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"userAPIRequest"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "test1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}

@@ -108,6 +108,7 @@ export async function getUserProfile(req: Request, res: Response, next: NextFunc
     return res.status(200).send({
         token: `Bearer ` + generateJWTToken({
             user: {
+                _id:user._id,
                 email: user.email,
                 username: user.username,
                 isActivated: user.isActivated

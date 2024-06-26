@@ -20,6 +20,11 @@ export const createTask = async ({
     createdBy,
 }: ITask): Promise<IReturn> => {
     try {
+        console.log(title,
+            description,
+            status,
+            dueDate,
+            createdBy)
         let newTask = new taskModel({
             title,
             description,

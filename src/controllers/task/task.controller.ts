@@ -25,7 +25,7 @@ export async function taskAPIRequest(
     res: Response,
     next: NextFunction
 ) {
-    // console.log(req.body.loginUser._id)
+    console.log(req.body.loginUser)
     const createdBy = req.body.loginUser.user._id;
     const _id = _.get(req.body, "_id", "").toLowerCase();
     const title = _.get(req.body, "title", "").toLowerCase();
